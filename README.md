@@ -22,7 +22,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add this to the model you want to add an api queries.
+
+```ruby
+include ApiQueries
+```
+
+Optional Parameters:
+- `active_only [1, 0]`
+- `page [1 ~ n]`
+
+Get data filtered by date:
+- `after`
+- `before`
+- `from`
+- `to`
+
+Available Queries:
+- `q=count`
+- `q=last_updated_at`
+
+Example:
+```ruby
+# Get active products(assuming you have a status column)
+Product.api_q({ active_only: 1 })
+
+# Get active products and go to page 2
+Product.api_q({ active_only: 1, page: 2 })
+
+# Get all dates using from and to
+# Date format should be: YYYY-MM-DDTHH:MM:SSZ
+Product.api_q({ from: '2016-01-01T12:00:00Z', to: '2016-01-31T12:00:00Z' })
+
+# Count all products
+Product.api_q({ q: 'count' })
+
+# Get last updated_at
+Product.api_q({ q: 'last_updated_at' })
+
+```
 
 ## Development
 
@@ -32,7 +70,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/api_queries. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/denmarkmeralpis/api_queries. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
