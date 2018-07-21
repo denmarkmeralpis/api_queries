@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/denmarkmeralpis/api_queries.svg?branch=master)](https://travis-ci.org/denmarkmeralpis/api_queries)
 # ApiQueries
 
 Manage you api using `api_q` method.
