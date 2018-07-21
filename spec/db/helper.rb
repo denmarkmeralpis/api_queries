@@ -29,11 +29,11 @@ module Db
     end
 
     def db_user
-      ENV['TRAVIS_DB_USER'] ? 'travis_user' : 'root'
+      ENV['TRAVIS_DB_USER'] ? 'travis' : 'root'
     end
 
     def db_password
-      ENV['TRAVIS_DB_PASSWORD'] ? 'travis_password' : 'root'
+      ENV['TRAVIS_DB_PASSWORD'] ? '' : 'root'
     end
 
     def db_name
@@ -44,7 +44,7 @@ end
 
 include Db::MySQL
 
-drop_and_create_database
+drop_and_create_database unless ENV['TRAVIS']
 
 connect_db
 
