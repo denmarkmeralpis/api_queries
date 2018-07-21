@@ -3,10 +3,7 @@ language: ruby
 rvm:
   - 2.4.1
 before_install: gem install bundler -v 1.16.1
-after_install: bundle exec rspec spec
 notifications: false
-services:
-  - mysql
 
 env:
   global:

@@ -23,5 +23,3 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
-
-ActiveRecord::Base.default_timezone = :utc
