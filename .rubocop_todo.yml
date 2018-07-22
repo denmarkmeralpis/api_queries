@@ -132,7 +132,7 @@ Style/ExpandPathArguments:
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'lib/api_queries.rb'
+    # - 'lib/api_queries.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
