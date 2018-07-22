@@ -1,4 +1,3 @@
-require_relative '../spec_helper'
 require 'active_support'
 require 'api_queries/version'
 
