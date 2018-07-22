@@ -2,7 +2,12 @@ sudo: false
 language: ruby
 rvm:
   - 2.4.1
-before_install: gem install bundler -v 1.16.1
+
+before_install: 
+  - gem update --system
+  - gem install bundler -v 1.16.1
+  - "rm ${BUNDLE_GEMFILE}.lock"
+
 notifications: false
 
 env:
@@ -10,6 +15,7 @@ env:
     - CC_TEST_REPORTER_ID=473182c75192efef9fbb9c841f0770c4147105b755a8c7230bc02ccf25f0da71
 
 before_script:
+  - bundle update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
@@ -19,3 +25,8 @@ scripts:
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+services: 
+  - mysql
+
+cache: bundler
