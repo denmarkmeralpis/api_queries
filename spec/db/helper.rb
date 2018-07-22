@@ -44,7 +44,7 @@ end
 
 include Db::MySQL
 
-drop_and_create_database# unless ENV['TRAVIS']
+drop_and_create_database # unless ENV['TRAVIS']
 
 connect_db
 
