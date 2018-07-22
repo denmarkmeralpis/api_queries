@@ -14,7 +14,6 @@ env:
     - CC_TEST_REPORTER_ID=473182c75192efef9fbb9c841f0770c4147105b755a8c7230bc02ccf25f0da71
 
 before_script:
-  - bundle update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
