@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/denmarkmeralpis/api_queries.svg?branch=master)](https://travis-ci.org/denmarkmeralpis/api_queries) [![Maintainability](https://api.codeclimate.com/v1/badges/93675db98a1701fb4686/maintainability)](https://codeclimate.com/github/denmarkmeralpis/api_queries/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/93675db98a1701fb4686/test_coverage)](https://codeclimate.com/github/denmarkmeralpis/api_queries/test_coverage)
+[![Build Status](https://travis-ci.org/denmarkmeralpis/api_queries.svg?branch=master)](https://travis-ci.org/denmarkmeralpis/api_queries) [![Maintainability](https://api.codeclimate.com/v1/badges/93675db98a1701fb4686/maintainability)](https://codeclimate.com/github/denmarkmeralpis/api_queries/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/93675db98a1701fb4686/test_coverage)](https://codeclimate.com/github/denmarkmeralpis/api_queries/test_coverage) [![Gem Version](https://badge.fury.io/rb/api_queries.svg)](https://badge.fury.io/rb/api_queries)
 # ApiQueries
 
 Manage you api using `api_q` method.
