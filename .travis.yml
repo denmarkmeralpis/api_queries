@@ -11,7 +11,7 @@ notifications: false
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=473182c75192efef9fbb9c841f0770c4147105b755a8c7230bc02ccf25f0da71
+    - CC_TEST_REPORTER_ID=808ac5a7a22827ca94cd442e9a0cbc2a8b5ba51c70633ed2ba870aa209a73616
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -26,5 +26,3 @@ after_script:
 
 services: 
   - mysql
-
-cache: bundler
