@@ -11,10 +11,10 @@ env:
     - CC_TEST_REPORTER_ID=808ac5a7a22827ca94cd442e9a0cbc2a8b5ba51c70633ed2ba870aa209a73616
 
 before_script:
+  - bundle exec rspec && CODECLIMATE_REPO_TOKEN=808ac5a7a22827ca94cd442e9a0cbc2a8b5ba51c70633ed2ba870aa209a73616
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - bundle exec rspec && CODECLIMATE_REPO_TOKEN=808ac5a7a22827ca94cd442e9a0cbc2a8b5ba51c70633ed2ba870aa209a73616
 
 scripts:
   - bundle exec rspec spec
