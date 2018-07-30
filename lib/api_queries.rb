@@ -1,6 +1,5 @@
-require 'active_support'
+require 'active_support/core_ext/string/conversions'
 require 'api_queries/version'
-
 # ApiQueries
 module ApiQueries
   extend ActiveSupport::Concern
@@ -53,7 +52,8 @@ module ApiQueries
     private
 
     def fdate(date_string)
-      Date.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ') # YYYY-MM-DDTHH:MM:SSZ
+      # Date.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ') # YYYY-MM-DDTHH:MM:SSZ
+      date_string.to_datetime
     end
   end
   extend ClassMethods
