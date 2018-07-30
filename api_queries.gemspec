@@ -5,8 +5,8 @@ require 'api_queries/version'
 Gem::Specification.new do |spec|
   spec.name          = 'api_queries'
   spec.version       = ApiQueries::VERSION
-  spec.authors       = ['denmarkmeralpis']
-  spec.email         = ['denmark@nueca.net']
+  spec.authors       = ['Nujian Den Mark Meralpis']
+  spec.email         = ['denmarkmeralpis@gmail.com']
 
   spec.summary       = 'This will wrap all the api methods in just a single call.'
   spec.description   = 'A lightweight rails plugin that is very useful for developers.'
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency             'activerecord', '>= 4.2'
+  spec.add_dependency             'activerecord', '~> 4.2'
   spec.add_dependency             'will_paginate', '~> 3.1'
   spec.add_development_dependency 'activesupport', '~> 4.2'
   spec.add_development_dependency 'bundler', '~> 1.12'

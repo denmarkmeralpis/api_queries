@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     api_queries (0.1.2)
-      activerecord (>= 4.2)
+      activerecord (~> 4.2)
       will_paginate (~> 3.1)
 
 GEM
