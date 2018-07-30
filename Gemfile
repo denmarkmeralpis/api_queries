@@ -6,6 +6,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 group :test do
+  gem 'mysql2', '>= 0.3.13', '< 0.4.0'
   gem 'simplecov'
   gem 'simplecov-console'
 end
