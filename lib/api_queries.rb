@@ -1,15 +1,23 @@
 require 'active_support/core_ext/string/conversions'
 require 'api_queries/version'
+require 'api_queries/errors/unknown_column'
+
 # ApiQueries
 module ApiQueries
   extend ActiveSupport::Concern
   # class method
   module ClassMethods
     def api_q(opts={})
+      # add default value
+      opts[:column_date] = 'updated_at' unless opts[:column_date].present?
+
+      # check if specified column exists
+      raise Errors::UnknownColumn, 'Invalid value for column_date.' if column_names.exclude?(opts[:column_date])
+
       # last updated at q
       if opts[:q] == 'last_updated_at'
         return { last_updated_at: (begin
-                                     order('updated_at DESC').limit(1).first.updated_at.strftime('%Y-%m-%dT%H:%M:%SZ')
+                                     order(opts[:column_date] => :desc).limit(1).first.updated_at.strftime('%Y-%m-%dT%H:%M:%SZ')
                                    rescue StandardError
                                      nil
                                    end) }
@@ -20,19 +28,19 @@ module ApiQueries
 
       # AFTER: updated_at > given_date
       if opts[:after].present?
-        conditions = ['updated_at > ?', fdate(opts[:after])]
+        conditions = ["#{opts[:column_date]} > ?", fdate(opts[:after])]
       # BEFORE: updated_at < given_date
       elsif opts[:before].present?
-        conditions = ['updated_at < ?', fdate(opts[:before])]
+        conditions = ["#{opts[:column_date]} < ?", fdate(opts[:before])]
       # FROM & TO: between "from date" to "to date"
       elsif opts[:from].present? && opts[:to].present?
         conditions[:updated_at] = (fdate(opts[:from])..fdate(opts[:to]))
       # FROM: updated_at >= given_date
       elsif opts[:from].present?
-        conditions = ['updated_at >= ?', fdate(opts[:from])]
+        conditions = ["#{opts[:column_date]} >= ?", fdate(opts[:from])]
       # TO: updated_at <= given_date
       elsif opts[:to].present?
-        conditions = ['updated_at <= ?', fdate(opts[:to])]
+        conditions = ["#{opts[:column_date]} <= ?", fdate(opts[:to])]
       end
 
       # get by status

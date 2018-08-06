@@ -64,5 +64,9 @@ RSpec.describe ApiQueries do
       expect(User.api_q(to: '2018-07-20T00:00:00Z', active_only: '1').count).to eq(1)
       expect(User.api_q(to: '2018-07-20T00:00:00Z', active_only: '1', q: 'count')[:count]).to eq(1)
     end
+
+    it 'raises exception if column_date is invalid' do
+      expect { User.api_q(q: 'count', column_date: 'non-existent column') }.to raise_error(ApiQueries::Errors::UnknownColumn)
+    end
   end
 end
