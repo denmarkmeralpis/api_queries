@@ -30,6 +30,7 @@ include ApiQueries
 Optional Parameters:
 - `active_only [1, 0]`
 - `page [1 ~ n]`
+- `column_date`(Default is `updated_at`)
 
 Get data filtered by date:
 - `after`
@@ -63,7 +64,17 @@ Product.api_q(q: 'count')
 
 # Get last updated_at
 Product.api_q(q: 'last_updated_at')
+```
 
+You can catch exception `ApiQueries::Errors::UnknownColumn` in your `api_controller.rb` if the value of `column_date` is invalid or does not exist. Example below:
+
+```ruby
+# api_controller.rb
+rescue_from ApiQueries::Errors::UnknownColumn, with: render_unknown_column_error
+
+def render_unknown_column_error
+    render json: { errors: 'Your error message' }, status: 422
+end
 ```
 
 ## Contributing
