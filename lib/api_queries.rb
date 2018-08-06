@@ -34,7 +34,7 @@ module ApiQueries
         conditions = ["#{opts[:column_date]} < ?", fdate(opts[:before])]
       # FROM & TO: between "from date" to "to date"
       elsif opts[:from].present? && opts[:to].present?
-        conditions[:updated_at] = (fdate(opts[:from])..fdate(opts[:to]))
+        conditions[opts[:column_date].to_sym] = (fdate(opts[:from])..fdate(opts[:to]))
       # FROM: updated_at >= given_date
       elsif opts[:from].present?
         conditions = ["#{opts[:column_date]} >= ?", fdate(opts[:from])]
