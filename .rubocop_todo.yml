@@ -20,17 +20,17 @@ Lint/UnreachableCode:
 
 # Offense count: 1
 Metrics/AbcSize:
-  Max: 61
+  Max: 65
 
 # Offense count: 2
 # Configuration parameters: CountComments, ExcludedMethods.
 # ExcludedMethods: refine
 Metrics/BlockLength:
-  Max: 58
+  Max: 80
 
 # Offense count: 1
 Metrics/CyclomaticComplexity:
-  Max: 16
+  Max: 20
 
 # Offense count: 1
 # Configuration parameters: CountComments.
@@ -39,7 +39,7 @@ Metrics/MethodLength:
 
 # Offense count: 1
 Metrics/PerceivedComplexity:
-  Max: 18
+  Max: 20
 
 # Offense count: 1
 Style/MixinUsage:
@@ -56,4 +56,4 @@ Style/RescueModifier:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 129
+  Max: 135

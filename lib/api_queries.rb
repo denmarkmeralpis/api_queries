@@ -11,36 +11,38 @@ module ApiQueries
       # add default value
       opts[:column_date] = 'updated_at' unless opts[:column_date].present?
 
-      # check if specified column exists
-      raise Errors::UnknownColumn, 'Invalid value for column_date.' if column_names.exclude?(opts[:column_date])
-
-      # last updated at q
-      if opts[:q] == 'last_updated_at'
-        return { last_updated_at: (begin
-                                     order(opts[:column_date] => :desc).limit(1).first.updated_at.strftime('%Y-%m-%dT%H:%M:%SZ')
-                                   rescue StandardError
-                                     nil
-                                   end) }
-      end
-
       # condition hash
       conditions = {}
 
-      # AFTER: updated_at > given_date
-      if opts[:after].present?
-        conditions = ["#{opts[:column_date]} > ?", fdate(opts[:after])]
-      # BEFORE: updated_at < given_date
-      elsif opts[:before].present?
-        conditions = ["#{opts[:column_date]} < ?", fdate(opts[:before])]
-      # FROM & TO: between "from date" to "to date"
-      elsif opts[:from].present? && opts[:to].present?
-        conditions[opts[:column_date].to_sym] = (fdate(opts[:from])..fdate(opts[:to]))
-      # FROM: updated_at >= given_date
-      elsif opts[:from].present?
-        conditions = ["#{opts[:column_date]} >= ?", fdate(opts[:from])]
-      # TO: updated_at <= given_date
-      elsif opts[:to].present?
-        conditions = ["#{opts[:column_date]} <= ?", fdate(opts[:to])]
+      # check if specified column exists
+      if column_names.include?(opts[:column_date])
+        # last updated at q
+        if opts[:q] == 'last_updated_at'
+          return { last_updated_at: (begin
+                                      order(opts[:column_date] => :desc).limit(1).first.updated_at.strftime('%Y-%m-%dT%H:%M:%SZ')
+                                    rescue StandardError
+                                      nil
+                                    end) }
+        end
+
+        # AFTER: updated_at > given_date
+        if opts[:after].present?
+          conditions = ["#{opts[:column_date]} > ?", fdate(opts[:after])]
+        # BEFORE: updated_at < given_date
+        elsif opts[:before].present?
+          conditions = ["#{opts[:column_date]} < ?", fdate(opts[:before])]
+        # FROM & TO: between "from date" to "to date"
+        elsif opts[:from].present? && opts[:to].present?
+          conditions[opts[:column_date].to_sym] = (fdate(opts[:from])..fdate(opts[:to]))
+        # FROM: updated_at >= given_date
+        elsif opts[:from].present?
+          conditions = ["#{opts[:column_date]} >= ?", fdate(opts[:from])]
+        # TO: updated_at <= given_date
+        elsif opts[:to].present?
+          conditions = ["#{opts[:column_date]} <= ?", fdate(opts[:to])]
+        end
+      else
+        raise Errors::UnknownColumn, 'Invalid value for column_date.' unless opts[:column_date] == 'updated_at'
       end
 
       # get by status
