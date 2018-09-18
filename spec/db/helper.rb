@@ -13,7 +13,11 @@ module Db
       ActiveRecord::Base.establish_connection(temp_connection)
 
       # drop existing db if exists
-      ActiveRecord::Base.connection.drop_database(db_name) rescue nil
+      begin
+        ActiveRecord::Base.connection.drop_database(db_name)
+      rescue StandardError
+        nil
+      end
 
       # create new db
       ActiveRecord::Base.connection.create_database(db_name)
@@ -55,9 +59,19 @@ ActiveRecord::Schema.define do
     t.string :status, default: 'active'
     t.timestamps null: false
   end
+
+  create_table :products do |t|
+    t.string :name
+    t.string :status, default: 'active'
+  end
 end
 
-# Model
+# User Model
 class User < ActiveRecord::Base
+  include ApiQueries
+end
+
+# Product Model
+class Product < ActiveRecord::Base
   include ApiQueries
 end
