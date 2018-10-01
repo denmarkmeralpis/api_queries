@@ -27,19 +27,22 @@ module ApiQueries
 
         # AFTER: updated_at > given_date
         if opts[:after].present?
-          conditions = ["#{opts[:column_date]} > ?", fdate(opts[:after])]
+          conditions = ["#{table_name}.#{opts[:column_date]} > ?", fdate(opts[:after])]
         # BEFORE: updated_at < given_date
         elsif opts[:before].present?
-          conditions = ["#{opts[:column_date]} < ?", fdate(opts[:before])]
+          conditions = ["#{table_name}.#{opts[:column_date]} < ?", fdate(opts[:before])]
         # FROM & TO: between "from date" to "to date"
         elsif opts[:from].present? && opts[:to].present?
-          conditions[opts[:column_date].to_sym] = (fdate(opts[:from])..fdate(opts[:to]))
+          # conditions[opts[:column_date].to_sym] = (fdate(opts[:from])..fdate(opts[:to]))
+          # conditions = ["#{self.table_name}.#{opts[:column_date]} >= ?"]
+          conditions = { table_name.to_sym => { opts[:column_date].to_sym => fdate(opts[:from])..fdate(opts[:to]) } }
+
         # FROM: updated_at >= given_date
         elsif opts[:from].present?
-          conditions = ["#{opts[:column_date]} >= ?", fdate(opts[:from])]
+          conditions = ["#{table_name}.#{opts[:column_date]} >= ?", fdate(opts[:from])]
         # TO: updated_at <= given_date
         elsif opts[:to].present?
-          conditions = ["#{opts[:column_date]} <= ?", fdate(opts[:to])]
+          conditions = ["#{table_name}.#{opts[:column_date]} <= ?", fdate(opts[:to])]
         end
       else
         raise Errors::UnknownColumn, 'Invalid value for column_date.' unless opts[:column_date] == 'updated_at'
