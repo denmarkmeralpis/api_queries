@@ -55,6 +55,7 @@ connect_db
 ActiveRecord::Schema.verbose = false
 ActiveRecord::Schema.define do
   create_table :users do |t|
+    t.integer :account_id
     t.string :name
     t.string :status, default: 'active'
     t.timestamps null: false
@@ -64,14 +65,26 @@ ActiveRecord::Schema.define do
     t.string :name
     t.string :status, default: 'active'
   end
+
+  create_table :accounts do |t|
+    t.string :name
+    t.timestamps
+  end
 end
 
 # User Model
 class User < ActiveRecord::Base
   include ApiQueries
+  belongs_to :account
 end
 
 # Product Model
 class Product < ActiveRecord::Base
   include ApiQueries
+end
+
+# Account Model
+class Account < ActiveRecord::Base
+  include ApiQueries
+  has_many :users
 end
